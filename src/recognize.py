@@ -5,6 +5,7 @@ import os
 
 ENCODINGS_FILE = "data/known_faces/encodings.pkl"
 TOLERANCE = 0.6  # lower = stricter match. 0.6 is face_recognition's default.
+GRANT_COOLDOWN_FRAMES = 30 # avoid flickering text every single frame
 
 def load_known_encodings():
     if not os.path.exists(ENCODINGS_FILE):
@@ -36,6 +37,8 @@ def main():
         face_locations = face_recognition.face_locations(rgb_frame)
         face_encodings = face_recognition.face_encodings(rgb_frame, face_locations)
 
+        access_granted = False
+
         for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
             matches = face_recognition.compare_faces(
                 known_encodings_list, face_encoding, tolerance=TOLERANCE
@@ -47,11 +50,19 @@ def main():
                 best_match_index = distances.argmin()
                 if matches[best_match_index]:
                     name = known_names_list[best_match_index]
+                    access_granted = True
 
             color = (0, 255, 0) if name != "Unknown" else (0, 0, 255)
             cv2.rectangle(frame, (left, top), (right, bottom), color, 2)
             cv2.putText(frame, name, (left, top - 10),
                         cv2.FONT_HERSHEY_SIMPLEX, 0.8, color, 2)
+
+        # Access banner
+        banner_text = "ACCESS GRANTED" if access_granted else "ACCESS DENIED"
+        banner_color = (0, 200, 0) if access_granted else (0, 0, 200)
+        cv2.rectangle(frame, (0, 0), (frame.shape[1], 50), banner_color, -1)
+        cv2.putText(frame, banner_text, (20, 35),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2)
 
         cv2.imshow("Face Recognition", frame)
 
