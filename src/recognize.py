@@ -1,3 +1,13 @@
+"""
+recognize.py
+
+Runs live face recognition. Detects faces in the webcam feed,
+generates an encoding for each one, and compares it against the
+known encodings saved by enroll.py. Labels each face with a name
+(or "Unknown") and displays an Access Granted / Access Denied
+banner based on if a known face is present.
+"""
+
 import cv2
 import face_recognition
 import pickle

@@ -1,3 +1,13 @@
+"""
+enroll.py
+
+Captures a reference photo of a person via webcam and generates
+their 128-number face encoding using face_recognition. Saves both
+the photo and the encoding to data/known_faces/, so main.py and
+recognize.py have a known face to compare against. Run this once
+per person before running main.py.
+"""
+
 import cv2
 import face_recognition
 import os

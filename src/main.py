@@ -1,3 +1,14 @@
+"""
+main.py
+
+The full app. Initializes the database, loads
+known face encodings from enroll.py's output, then runs the live
+webcam loop. Detects faces, recognizes them against known
+encodings, displays name labels and the Access Granted/Denied
+banner, and logs attendance to the database (with a cooldown to
+avoid duplicate log entries while a person stays in frame).
+"""
+
 import cv2
 import face_recognition
 import pickle

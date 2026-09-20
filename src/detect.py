@@ -1,3 +1,11 @@
+"""
+detect.py
+
+Detects faces in the live webcam feed and draws a bounding box
+around each one. Uses face_recognition.face_locations() to find
+faces.
+"""
+
 import cv2
 import face_recognition
 

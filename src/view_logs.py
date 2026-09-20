@@ -1,3 +1,10 @@
+"""
+view_logs.py
+
+Reads all attendance records from the database (via database.py)
+and prints them to the terminal as a table.
+"""
+
 from database import get_all_logs
 
 def main():

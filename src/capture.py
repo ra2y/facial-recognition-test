@@ -1,3 +1,10 @@
+"""
+capture.py
+
+Opens the default webcam and displays the raw live video feed.
+Check that video capture works before any detection or recognition logic.
+"""
+
 import cv2
 
 def main():

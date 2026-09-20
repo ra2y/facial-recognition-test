@@ -1,3 +1,13 @@
+"""
+database.py
+
+Sets up and manages the SQLite database (data/attendance.db).
+Defines two tables, people (enrolled individuals) and
+attendance_log (timestamped recognition events, linked to people).
+Provides functions to initialize the schema, look up or create a
+person, log an attendance event, and retrieve the full log history.
+"""
+
 import sqlite3
 import os
 from datetime import datetime
